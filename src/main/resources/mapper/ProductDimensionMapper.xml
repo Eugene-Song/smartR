@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eugene.eugeneblog.dao.ProductDimensionMapper">
+<resultMap id="productResultMap" type="com.eugene.eugeneblog.entity.ProductDimension">
+    <id property="productID" column="product_id" jdbcType="INTEGER"/>
+    <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+    <result property="productGroupID" column="product_group_id" jdbcType="INTEGER"/>
+    <result property="productGroupName" column="product_group_name" jdbcType="VARCHAR"/>
+    <result property="salesStatus" column="sales_status" jdbcType="VARCHAR"/>
+    <result property="productDeveloperID" column="product_developer_id" jdbcType="INTEGER"/>
+    <result property="productDeveloper" column="product_developer" jdbcType="VARCHAR"/>
+    <result property="listingDate" column="listing_date" jdbcType="DATE"/>
+    <result property="productMarketID" column="product_market_id" jdbcType="INTEGER"/>
+    <result property="marketUniqueID" column="market_unique_id" jdbcType="INTEGER"/>
+    <result property="supplierID" column="supplier_id" jdbcType="INTEGER"/>
+    <result property="shopID" column="shop_id" jdbcType="INTEGER"/>
+</resultMap>
+    <sql id="All_Column_List">
+        product_id, product_name, product_group_id, product_group_name, sales_status, product_developer_id,
+        product_developer, listing_date, product_market_id, market_unique_id, supplier_id, shop_id
+    </sql>
+    <select id="selectProduct" resultMap="productResultMap">
+        SELECT * FROM productDimension WHERE product_id = #{productID,jdbcType=INTEGER}
+    </select>
+
+    <select id="findProductBasicInfoList" parameterType="Map" resultMap="productResultMap">
+        select
+        <include refid="All_Column_List"/>
+        from productDimension
+--         where is_deleted=0
+<!--        <if test="keyword!=null">-->
+<!--            AND (blog_title like CONCAT('%',#{keyword},'%' ) or blog_category_name like CONCAT('%',#{keyword},'%' ))-->
+<!--        </if>-->
+<!--        <if test="blogStatus!=null">-->
+<!--            AND blog_status = #{blogStatus}-->
+<!--        </if>-->
+<!--        <if test="blogCategoryId!=null">-->
+<!--            AND blog_category_id = #{blogCategoryId}-->
+<!--        </if>-->
+<!--        order by blog_id desc-->
+<!--        <if test="start!=null and limit!=null">-->
+<!--            limit #{start},#{limit}-->
+<!--        </if>-->
+    </select>
+
+    <select id="getTotalProducts" parameterType="Map" resultType="int">
+        select count(*) from productDimension
+<!--        where is_deleted=0-->
+<!--        <if test="keyword!=null">-->
+<!--            AND (blog_title like CONCAT('%',#{keyword},'%' ) or blog_category_name like CONCAT('%',#{keyword},'%' ))-->
+<!--        </if>-->
+<!--        <if test="blogStatus!=null">-->
+<!--            AND blog_status = #{blogStatus}-->
+<!--        </if>-->
+<!--        <if test="blogCategoryId!=null">-->
+<!--            AND blog_category_id = #{blogCategoryId}-->
+<!--        </if>-->
+    </select>
+    <!-- Add other CRUD operations here. -->
+</mapper>

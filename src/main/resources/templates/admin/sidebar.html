@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <aside th:fragment="sidebar-fragment(path)" class="main-sidebar sidebar-dark-primary elevation-4">
+
     <!-- Brand Logo -->
     <a th:href="@{/admin/index}" class="brand-link">
         <img th:src="@{/admin/dist/img/logo.png}" alt="ssm-cluster Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">my blog</span>
+        <span class="brand-text font-weight-light">smartR</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -32,29 +33,46 @@
                             Dashboard
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a th:href="@{/admin/blogs/edit}" th:class="${path}=='edit'?'nav-link active':'nav-link'">
-                        <i class="nav-icon fa fa fa-pencil-square-o"></i>
-                        <p>
-                            发布博客
-                        </p>
-                    </a>
-                </li>
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a th:href="@{/admin/blogs/edit}" th:class="${path}=='edit'?'nav-link active':'nav-link'">-->
+<!--                        <i class="nav-icon fa fa fa-pencil-square-o"></i>-->
+<!--                        <p>-->
+<!--                            发布博客-->
+<!--                        </p>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li class="nav-header">管理模块</li>
-                <li class="nav-item">
-                    <a th:href="@{/admin/blogs}" th:class="${path}=='blogs'?'nav-link active':'nav-link'">
+                <li class="nav-item has-treeview" id="dropdown-menu" onclick="toggleDropdown()">
+                    <a th:href="@{/admin/products}" th:class="${path}=='blogs'?'nav-link active':'nav-link'">
                         <i class="fa fa-list-alt nav-icon" aria-hidden="true"></i>
                         <p>
-                            博客管理
+                            商品管理
                         </p>
                     </a>
+
+                    <ul class="nav nav-treeview" id="dropdown-submenu" style="background-color: #f0efd0; color: #333333;
+  border-radius: 10px;">
+                        <li class="nav-item">
+                            <a th:href="@{/admin/products}" th:class="${path}=='subitem1'?'nav-link active':'nav-link'">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>商品基本信息</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{/admin/subitem2}" th:class="${path}=='subitem2'?'nav-link active':'nav-link'">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Subitem 2</p>
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/admin/comments}" th:class="${path}=='comments'?'nav-link active':'nav-link'">
                         <i class="fa fa-comments nav-icon" aria-hidden="true"></i>
                         <p>
-                            评论管理
+                            员工管理
                         </p>
                     </a>
                 </li>
@@ -62,7 +80,7 @@
                     <a th:href="@{/admin/categories}" th:class="${path}=='categories'?'nav-link active':'nav-link'">
                         <i class="fa fa-bookmark nav-icon" aria-hidden="true"></i>
                         <p>
-                            分类管理
+                            店铺管理
                         </p>
                     </a>
                 </li>
@@ -70,7 +88,7 @@
                     <a th:href="@{/admin/tags}" th:class="${path}=='tags'?'nav-link active':'nav-link'">
                         <i class="fa fa-tags nav-icon" aria-hidden="true"></i>
                         <p>
-                            标签管理
+                            库存管理
                         </p>
                     </a>
                 </li>
@@ -78,7 +96,7 @@
                     <a th:href="@{/admin/links}" th:class="${path}=='links'?'nav-link active':'nav-link'">
                         <i class="fa fa-heart nav-icon" aria-hidden="true"></i>
                         <p>
-                            友情链接
+                            供应商链接
                         </p>
                     </a>
                 </li>
@@ -109,4 +127,21 @@
     </div>
     <!-- /.sidebar -->
 </aside>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById('dropdown-menu');
+        if (dropdownMenu.classList.contains('menu-open')) {
+            dropdownMenu.classList.remove('menu-open');
+        } else {
+            dropdownMenu.classList.add('menu-open');
+        }
+    }
+    /*]]>*/
+</script>
+<style>
+    #dropdown-submenu{
+        /* replace #yourColor with the color you want */
+    }
+</style>
 </html>
